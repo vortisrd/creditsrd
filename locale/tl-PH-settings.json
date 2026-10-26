@@ -30,7 +30,9 @@
 		"size": "Laki",
 		"size_hint": "Binabago ang laki ng CreditsRD",
 		"color": "Kulay",
-		"color_hint": "Binabago ang kulay ng font ng CreditsRD"
+		"color_hint": "Binabago ang kulay ng font ng CreditsRD",
+		"ignore_chatters": "Balewalain ang mga Chatter",
+    	"ignore_chatters_hint": "Paghiwalayin ng kuwit ang mga username. hal.: Streamlabs,Streamelements"
 	},
 	"style": {
 		"title": "Mga Visual Style",

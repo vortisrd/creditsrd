@@ -5,6 +5,7 @@
 const tikFinityStatus = {};
 
 const showTiktok                    = getURLParam("showTiktok", false);
+const showTikTokMessages            = getURLParam("showTikTokMessages", true);
 const showTikTokFollows             = getURLParam("showTikTokFollows", true);
 const showTikTokLikes               = getURLParam("showTikTokLikes", false);
 const showTikTokShares              = getURLParam("showTikTokShares", false);
@@ -63,6 +64,7 @@ async function tiktokConnection() {
                 case 'follow': tiktokFollowMessage(tiktokData); break;
                 case 'gift': tiktokGiftMessage(tiktokData); break;
                 case 'subscribe': tiktokSubMessage(tiktokData); break;
+                case 'chat': tiktokChatMessage(tiktokData); break;
                 case 'liveStatusChange' :
                     if (tiktokData.isLive) { creditsRdReset('tiktok'); }
                 break;
@@ -131,6 +133,31 @@ async function tiktokConnection() {
 
 // ---------------------------
 // TIKTOK UTILITY FUNCTIONS
+
+async function tiktokChatMessage(data) {
+    
+    if (!data?.comment) { data.comment = " "; }
+    if (showTikTokMessages == false) return;
+    if (ignoreUserList.includes(data.uniqueId.toLowerCase())) return;
+    
+    const id = data.userId;
+    const name = data.nickname;
+    const login = data.uniqueId;
+    const avatar = data.profilePictureUrl;
+
+	addEvent({
+		id: `tiktok-chat-${id}`,
+		platform: "tiktok",
+		type: "chat",
+		ts: Date.now(),
+		user: { id, name, avatar },
+        data: { }
+	});
+
+}
+
+
+
 async function tiktokFollowMessage(data) {
 
     if (showTikTokFollows == false) return;

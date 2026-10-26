@@ -5,7 +5,7 @@
 const twitchModule = true;
 
 const showTwitch                        = getURLParam("showTwitch", false);
-
+const showTwitchMessages                = getURLParam("showTwitchMessages", true);
 const showTwitchFollows                 = getURLParam("showTwitchFollows", true);
 const showTwitchBits                    = getURLParam("showTwitchBits", true);
 const showTwitchSubs                    = getURLParam("showTwitchSubs", true);
@@ -20,6 +20,9 @@ const twitchAvatars = new Map();
 // TWITCH EVENTS HANDLERS
 
 const twitchMessageHandlers = {
+    'Twitch.ChatMessage': (response) => {
+        twitchChatMessage(response.data);
+    },
     'Twitch.Follow': (response) => {
         twitchFollowMessage(response.data);
     },
@@ -70,6 +73,25 @@ if (showTwitch) {
 // ---------------------------
 // TWITCH EVENT FUNCTIONS
 
+async function twitchChatMessage(data) {
+    
+    if (showTwitchMessages == false) return;
+    if (ignoreUserList.includes(data.user.login)) return;
+
+    const { id, name, login } = data.user;
+    const avatar = await getTwitchAvatar(login);
+
+    addEvent({
+		id: `tw-chat-${id}`,
+		platform: "twitch",
+		type: "chat",
+		ts: Date.now(),
+		user: { id: id, name: name, avatar: avatar },
+		data: { }
+	});
+
+}
+
 async function twitchFollowMessage(data) {
 	if (showTwitchFollows == false) return;
 
@@ -85,18 +107,19 @@ async function twitchFollowMessage(data) {
 	});
 }
 
-function twitchRewardRedemption(data) {
+async function twitchRewardRedemption(data) {
     
 	if (showTwitchRewardRedemptions == false) return;
     
-	const { id, user_id, user_name, reward } = data;
+	const { id, user_id, user_name, user_login, reward } = data;
+    const avatar = await getTwitchAvatar(user_login);
 
 	addEvent({
 		id: `tw-reward-${id}`,
 		platform: "twitch",
 		type: "reward",
 		ts: Date.now(),
-		user: { id: user_id, name: user_name },
+		user: { id: user_id, name: user_name, avatar: avatar },
 		data: { rewardName: reward.title, cost: reward.cost }
 	});
 }

@@ -30,7 +30,9 @@
 		"size": "Tamanho",
 		"size_hint": "Altera o tamanho do CreditsRD",
 		"color": "Cor",
-		"color_hint": "Altera a cor da fonte do CreditsRD"
+		"color_hint": "Altera a cor da fonte do CreditsRD",
+		"ignore_chatters": "Ignorar Chatters",
+    	"ignore_chatters_hint": "Separe os nomes de usuário por vírgulas. ex.: Streamlabs,Streamelements"
 	},
 	"style": {
 		"title": "Estilos Visuais",

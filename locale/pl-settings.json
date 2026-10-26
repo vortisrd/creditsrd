@@ -30,7 +30,9 @@
 		"size": "Rozmiar",
 		"size_hint": "Zmienia rozmiar CreditsRD",
 		"color": "Kolor",
-		"color_hint": "Zmienia kolor czcionki CreditsRD"
+		"color_hint": "Zmienia kolor czcionki CreditsRD",
+		"ignore_chatters": "Ignoruj czatujących",
+    	"ignore_chatters_hint": "Oddziel nazwy użytkowników przecinkami. np.: Streamlabs,Streamelements"
 	},
 	"style": {
 		"title": "Style Wizualne",

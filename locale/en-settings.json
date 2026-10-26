@@ -30,7 +30,9 @@
     "size": "Size",
     "size_hint": "Changes CreditsRD's size",
     "color": "Color",
-    "color_hint": "Changes CreditsRD's font color"
+    "color_hint": "Changes CreditsRD's font color",
+    "ignore_chatters": "Ignore Chatters",
+    "ignore_chatters_hint": "Separate the usernames by commas. eg.: Streamlabs,Streamelements"
   },
   "style": {
     "title": "Visual Styles",

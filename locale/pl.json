@@ -1,4 +1,10 @@
 {
+	"chatters": "Czatujący",
+	"chattersSummary_one": "{count} osoba wzięła udział",
+	"chattersSummary_few": "{count} osoby wzięły udział",
+	"chattersSummary_many": "{count} osób wzięło udział",
+	"chattersSummary_other": "{count} osoby wzięły udział",
+
 	"followers": "Obserwujący",
 	"followersSummary_one": "{count} nowy obserwujący",
 	"followersSummary_few": "{count} nowych obserwujących",

@@ -3,7 +3,7 @@
 /* ---------------------- */
 
 const showKick                      = getURLParam("showKick", false);
-
+const showKickMessages              = getURLParam("showKickMessages", true);
 const showKickFollows               = getURLParam("showKickFollows", true);
 const showKickKicks                 = getURLParam("showKickKicks", true);
 const showKickSubs                  = getURLParam("showKickSubs", true);
@@ -15,6 +15,9 @@ const showKickRewardRedemptions     = getURLParam("showKickRewardRedemptions", t
 // KICK EVENTS HANDLERS
 
 const kickMessageHandlers = {
+    'Kick.ChatMessage': (response) => {
+        kickChatMessageFromStreamerBot(response.data);
+    },
     'Kick.Follow': (response) => {
         kickFollowMessage(response.data);
     },
@@ -57,6 +60,22 @@ document.addEventListener('DOMContentLoaded', async () => {
 // ---------------------------
 // KICK UTILITY FUNCTIONS
 
+async function kickChatMessageFromStreamerBot(data) {
+	if (showKickMessages == false) return;
+    if (ignoreUserList.includes(data.user.login.toLowerCase())) return;
+
+	const { id, name, login } = data.user;
+    const avatar = data.user.profilePicture;
+
+	addEvent({
+		id: `kick-chat-${id}`,
+		platform: "kick",
+		type: "chat",
+		ts: Date.now(),
+		user: { id, name, avatar }
+	});
+}
+
 async function kickFollowMessage(data) {
 	if (showKickFollows == false) return;
 
@@ -77,13 +96,14 @@ function kickRewardRedemptionFromStreamerBot(data) {
     if (showKickRewardRedemptions == false) return;
 
 	const { id, redeemer, reward } = data;
+    const avatar = data.redeemer.profilePicture;
 
 	addEvent({
 		id: `kick-reward-${id}`,
 		platform: "kick",
 		type: "reward",
 		ts: Date.now(),
-		user: { id: redeemer.id, name: redeemer.name },
+		user: { id: redeemer.id, name: redeemer.name, avatar: avatar },
 		data: { rewardName: reward.title, cost: reward.cost }
 	});
 }

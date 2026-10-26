@@ -1,4 +1,8 @@
 {
+	"chatters": "Chatters",
+  	"chattersSummary_one": "{count} pessoa participou",
+  	"chattersSummary_other": "{count} pessoas participaram",
+
 	"followers": "Seguidores",
 	"followersSummary_one": "{count} novo seguidor",
 	"followersSummary_other": "{count} novos seguidores",

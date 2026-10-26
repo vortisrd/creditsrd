@@ -30,7 +30,9 @@
 		"size": "Taille",
 		"size_hint": "Change la taille de CreditsRD",
 		"color": "Couleur",
-		"color_hint": "Change la couleur de la police de CreditsRD"
+		"color_hint": "Change la couleur de la police de CreditsRD",
+		"ignore_chatters": "Ignorer des chatteurs",
+    	"ignore_chatters_hint": "Sépare les noms d'utilisateur par des virgules. ex. : Streamlabs,Streamelements"
 	},
 	"style": {
 		"title": "Styles Visuels",

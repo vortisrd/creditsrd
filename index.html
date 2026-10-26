@@ -242,6 +242,18 @@
                         </div>
                     </div>
 
+                    <wa-divider></wa-divider>
+                    
+                    <div class="config slider">
+                        <div class="info">
+                            <div class="title" data-i18n="general.ignore_chatters">Ignore Chatters</div>
+                            <div class="description"><small data-i18n="general.ignore_chatters_hint">Separate the usernames by commas. eg.: Streamlabs,Streamelements</small></div>
+                        </div>
+                        <div class="element">
+                            <wa-input data-setting="ignoreChatters" data-default="Streamlabs,Streamelements" value="Streamlabs,Streamelements" autocomplete="off"></wa-input>
+                        </div>
+                    </div>
+
                 </wa-details>
                 
 
@@ -331,6 +343,15 @@
 
                     <div class="config">
                         <div class="info">    
+                            <div class="title" data-i18n="twitch.chat">Chat</div>
+                        </div>
+                        <div class="element">
+                            <wa-switch data-setting="showTwitchMessages" data-default="true" size="xl"></wa-switch>
+                        </div>
+                    </div>
+
+                    <div class="config">
+                        <div class="info">    
                             <div class="title" data-i18n="twitch.followers">Followers</div>
                         </div>
                         <div class="element">
@@ -409,6 +430,15 @@
 
                     <div class="config">
                         <div class="info">    
+                            <div class="title" data-i18n="youtube.chat">Chat</div>
+                        </div>
+                        <div class="element">
+                            <wa-switch data-setting="showYouTubeMessages" data-default="true" size="xl"></wa-switch>
+                        </div>
+                    </div>
+
+                    <div class="config">
+                        <div class="info">    
                             <div class="title" data-i18n="youtube.superchat">Super Chat</div>
                         </div>
                         <div class="element">
@@ -478,6 +508,15 @@
 
                     <div class="config">
                         <div class="info">    
+                            <div class="title" data-i18n="kick.chat">Chat</div>
+                        </div>
+                        <div class="element">
+                            <wa-switch data-setting="showKickMessages" data-default="true" size="xl"></wa-switch>
+                        </div>
+                    </div>
+
+                    <div class="config">
+                        <div class="info">    
                             <div class="title" data-i18n="kick.followers">Followers</div>
                         </div>
                         <div class="element">
@@ -535,6 +574,15 @@
                         <span class="title"><img src="js/modules/tiktok/images/logo-tiktok.svg"> <span data-i18n="tiktok.title">TikTok</span></span>
                         <span class="check"><wa-switch data-setting="showTiktok" data-default="false" class="section-switch" size="xl"></wa-switch></span>
                     </span>
+
+                    <div class="config">
+                        <div class="info">    
+                            <div class="title" data-i18n="tiktok.chat">Chat</div>
+                        </div>
+                        <div class="element">
+                            <wa-switch data-setting="showTikTokMessages" data-default="true" size="xl"></wa-switch>
+                        </div>
+                    </div>
 
                     <div class="config">
                         <div class="info">    
@@ -684,8 +732,8 @@
     <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.6/dist/purify.min.js"></script>
     <script src="https://unpkg.com/@streamerbot/client/dist/streamerbot-client.js"></script>
 
-    <script src="js/i18n-settings.js?nocache=010"></script>
+    <script src="js/i18n-settings.js?nocache=011"></script>
     
-    <script type="module" src="js/settings.js?nocache=010"></script>
+    <script type="module" src="js/settings.js?nocache=011"></script>
 </body>
 </html>

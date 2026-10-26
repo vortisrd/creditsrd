@@ -1,4 +1,8 @@
 {
+	"chatters": "Mga Chatter",
+  	"chattersSummary_one": "{count} tao ang sumali",
+  	"chattersSummary_other": "{count} katao ang sumali",
+
 	"followers": "Mga Follower",
 	"followersSummary_one": "{count} bagong follower",
 	"followersSummary_other": "{count} bagong follower",

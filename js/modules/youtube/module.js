@@ -4,7 +4,6 @@
 
 const showYoutube                       = getURLParam("showYoutube", false);
 const showYouTubeMessages               = getURLParam("showYouTubeMessages", true);
-const showYouTubeNewSubscriber          = getURLParam("showYouTubeNewSubscriber", true);
 const showYouTubeSuperChats             = getURLParam("showYouTubeSuperChats", true);
 const showYouTubeSuperStickers          = getURLParam("showYouTubeSuperStickers", true);
 const showYouTubeMemberships            = getURLParam("showYouTubeMemberships", true);
@@ -56,6 +55,24 @@ if (showYoutube) {
 
 // ---------------------------
 // YOUTUBE EVENT FUNCTIONS
+
+async function youTubeChatMessage(data) {
+
+    if (showYouTubeMessages == false) return;
+    if (ignoreUserList.includes(data.user.name.toLowerCase())) return;
+
+    const { user } = data;
+    if (!user?.id) return;
+
+    addEvent({
+        id: `yt-chat-${user.id}`,
+        platform: "youtube",
+        type: "chat",
+        ts: Date.now(),
+        user: { id: user.id, name: user.name, avatar: user.profileImageUrl },
+        data: { }
+    });
+}
 
 async function youTubeSuperChatMessage(data) {
 

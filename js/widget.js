@@ -1,13 +1,15 @@
-const title        = getURLParam("title", "Thank you for watching!");
-const summary      = getURLParam("summary", "See you next time. 😁");
-const showAvatar   = getURLParam("showAvatar", true);
-const platform     = getURLParam("platform", "twitch");
-const color        = getURLParam("color", "#FFFFFF");
-const font         = getURLParam("font", "DM Sans");
-const size         = getURLParam("size", 1);
-const speed        = getURLParam("speed", 1);
-const limitParam   = Number(getURLParam("limit", 15));
-const limit        = Number.isFinite(limitParam) && limitParam >= 0 ? Math.floor(limitParam) : 15;
+const title        					= getURLParam("title", "Thank you for watching!");
+const summary      					= getURLParam("summary", "See you next time. 😁");
+const showAvatar   					= getURLParam("showAvatar", true);
+const platform     					= getURLParam("platform", "twitch");
+const color        					= getURLParam("color", "#FFFFFF");
+const font         					= getURLParam("font", "DM Sans");
+const size         					= getURLParam("size", 1);
+const speed        					= getURLParam("speed", 1);
+const limitParam   					= Number(getURLParam("limit", 15));
+const limit        					= Number.isFinite(limitParam) && limitParam >= 0 ? Math.floor(limitParam) : 15;
+const ignoreChatters                = getURLParam("ignoreChatters", "Streamlabs,Streamelements");
+const ignoreUserList                = ignoreChatters.split(',').map(item => item.trim().toLowerCase()) || [];
 
 const widgetBody = document.body;
 const container = document.querySelector('#credits');
@@ -52,6 +54,14 @@ const PLATFORMS = [
 const giftCount = (e) => (e.data.amount ?? 1) * (e.data.months ?? 1);
 
 const SECTIONS = [
+	{
+		types: ["chat"],
+		maxVisible: limit,
+		labelKey: "chatters",
+		summaryKey: "chattersSummary",
+		unique: true,
+		uncounted: true
+	},
 	{
 		types: ["follow"],
 		maxVisible: limit,
@@ -264,6 +274,9 @@ const ACCUMULATE_FIELDS = new Map(
 		.flatMap((s) => s.types.map((t) => [t, s.accumulate === true ? ["amount"] : s.accumulate]))
 );
 
+const UNIQUE_TYPES = new Set(SECTIONS.filter((s) => s.unique).flatMap((s) => s.types));
+const UNCOUNTED_TYPES = new Set(SECTIONS.filter((s) => s.uncounted).flatMap((s) => s.types));
+
 function el(tag, className, text) {
 	const node = document.createElement(tag);
 	if (className) node.className = className;
@@ -423,11 +436,15 @@ function buildPlatform(platform, platformEvents) {
 	const logo = el("img", "logo");
 	logo.src = `js/modules/${platform.id}/images/logo-${platform.id}.svg`;
 	logo.alt = "";
+	
+	const counted = platformEvents.filter((e) => !UNCOUNTED_TYPES.has(e.type)).length;
+
 	header.append(
 		logo,
 		el("h2", null, platform.label),
-		el("small", null, tPlural("eventsCount", platformEvents.length))
+		el("small", null, tPlural("eventsCount", counted))
 	);
+
 	block.append(header);
 
 	for (const section of SECTIONS) {
